@@ -8,6 +8,7 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import UploadIcon from '@mui/icons-material/Upload';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from 'react-router-dom';
 
 //dummydata
 const dummyData = [
@@ -27,12 +28,15 @@ const dummyData = [
 
 
 const UsersPage = () => {
+
+    const navigate = useNavigate(); 
+
     return (
         <div>
             <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={8}>
                 <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
                     <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>Users</Typography>
-                    <Button variant='contained' sx={{letterSpacing: 1 , backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems:"center" , justifyContent:"center" }}><AddIcon sx={{ fontSize: 20, mr:1 }} /> Add User</Button>
+                    <Button variant='contained' sx={{letterSpacing: 1 , backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems:"center" , justifyContent:"center" }} onClick={() => navigate('/add-user')}><AddIcon sx={{ fontSize: 20, mr:1 }} /> Add User</Button>
                 </Box>
                 <Divider sx={{ bgcolor: "#8093F1", }} />
 
