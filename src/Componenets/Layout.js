@@ -36,7 +36,7 @@ const Layout = () => {
                 {/* Sidebar */}
                 <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, [`& .MuiDrawer-paper`]: { width: drawerWidth, bgcolor: "#B388EB", color: "black" } }}>
                     <Box py={3}>
-                        <Typography variant="h4" textAlign={"left"} pl={4} fontWeight={500}>Task Manager</Typography>
+                        <Typography variant="h4" textAlign={"left"} pl={3.5} fontWeight={500}>Task Manager</Typography>
                         <List>
                             {[
                                 { text: "Home", icon: <Home />, route: "/" },
