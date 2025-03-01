@@ -12,7 +12,13 @@ const dummyData = [
     { id: 3, name: "Johnathan Majors", status: "Incomplete" },
     { id: 4, name: "Scarlett Johansson", status: "Completed" },
     { id: 5, name: "Mark Ruffalo", status: "In Progress" },
+    { id: 6, name: "Chris Hemsworth", status: "Pending" },
+    { id: 7, name: "Robert Downey Jr.", status: "Completed" },
+    { id: 8, name: "Tom Holland", status: "In Progress" },
+    { id: 9, name: "Elizabeth Olsen", status: "Pending" },
+    { id: 10, name: "Benedict Cumberbatch", status: "Incomplete" },
 ];
+
 
 const DashboardPage = () => {
     return (
