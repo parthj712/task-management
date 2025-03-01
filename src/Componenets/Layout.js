@@ -53,11 +53,11 @@ const Layout = () => {
                             return (
                                 <ListItem key={item.text} >
                                     <ListItemButton component={Link} to={item.route} sx={{
-                                        bgcolor: isActive ? "white" : "transparent",
-                                        color: isActive ? "black" : "inherit",
+                                        // bgcolor: isActive ? "white" : "transparent",
+                                        color: isActive ? "white" : "inherit",
                                         borderRadius: 1,
                                     }}>
-                                        <ListItemIcon sx={{ color: "black" }}>{item.icon}</ListItemIcon>
+                                        <ListItemIcon  sx={{ color: "black" ,  color: isActive ? "white" : "inherit",  }}>{item.icon}</ListItemIcon>
                                         <ListItemText primary={item.text} />
                                     </ListItemButton>
                                 </ListItem>
