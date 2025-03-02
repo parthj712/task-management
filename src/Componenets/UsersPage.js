@@ -17,6 +17,7 @@ import {
     Typography,
     TextField,
 } from "@mui/material";
+import * as XLSX from "xlsx";
 
 // mui icons
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
@@ -50,6 +51,15 @@ const UsersPage = () => {
             user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.mobile.includes(searchTerm)
     );
+
+    const downloadTemplate = () => {
+        const worksheet = XLSX.utils.json_to_sheet(dummyData.map(user => ({ Name: user.name , Email: user.email , Mobile: user.mobile , TaskStatus : user.status}))); // Only Name column
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Users Template");
+    
+        // Create a downloadable Excel file
+        XLSX.writeFile(workbook, "Users_File.xlsx");
+    };
 
     return (
         <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={6}>
@@ -116,8 +126,8 @@ const UsersPage = () => {
                             <UploadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Export">
-                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" } , "&:hover" : {border : 1}}}>
+                    <Tooltip title="Download Template">
+                        <IconButton  onClick={downloadTemplate}  sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" } , "&:hover" : {border : 1}}}>
                             <SimCardDownloadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
                     </Tooltip>

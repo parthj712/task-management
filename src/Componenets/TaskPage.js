@@ -1,10 +1,11 @@
-import { Box, Button, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Button, Divider,Tooltip, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import React from 'react'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import UploadIcon from '@mui/icons-material/Upload';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from "xlsx";
 
 const dummyData = [
     { id: 1, taskname: "Add Skeleton for table view", assign: "01/01/2025", end: "01/05/2025" },
@@ -24,6 +25,15 @@ const TaskPage = () => {
 
     const navigate = useNavigate();
 
+      const downloadTemplate = () => {
+            const worksheet = XLSX.utils.json_to_sheet(dummyData.map(user => ({ TaskName: user.taskname, Task_Assign_Date: user.assign , Task_End_Date: user.end }))); // Only Name column
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Task Template");
+    
+            // Create a downloadable Excel file
+            XLSX.writeFile(workbook, "Task_File.xlsx");
+        };
+
     return (
         <div>
             <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={8}>
@@ -35,58 +45,22 @@ const TaskPage = () => {
                     <Divider sx={{ bgcolor: "#8093F1", }} />
                 </Box>
 
-                <Box display='flex' justifyContent='flex-end' gap={2}>
-                    <Box>
-                        <IconButton
-                            tooltipText="Download"
-                            sx={{
-                                backgroundColor: "#8093F1",
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}
-                        >
+                <Box display="flex" flexDirection={"row"} justifyContent='flex-end' gap={2}>
+                    <Tooltip title="Download">
+                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" }, "&:hover": { border: 1 } }}>
                             <FileDownloadOutlinedIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
-                    <Box>
-                        <IconButton tooltipText="Download"
-                            sx={{
-
-                                backgroundColor: "#8093F1",
-
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}>
+                    </Tooltip>
+                    <Tooltip title="Upload">
+                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" }, "&:hover": { border: 1 } }}>
                             <UploadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
-                    <Box>
-                        <IconButton tooltipText="Download"
-                            sx={{
-
-                                backgroundColor: "#8093F1",
-
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}>
+                    </Tooltip>
+                    <Tooltip title="Download Template">
+                        <IconButton onClick={downloadTemplate} sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" }, "&:hover": { border: 1 } }}>
                             <SimCardDownloadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
+                    </Tooltip>
                 </Box>
 
                 <Box>
