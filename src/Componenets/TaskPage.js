@@ -27,11 +27,13 @@ const TaskPage = () => {
     return (
         <div>
             <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={8}>
-                <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
-                    <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>Task</Typography>
-                    <Button variant='contained' sx={{ letterSpacing: 1, backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems: "center", justifyContent: "center" }} onClick={() => navigate('/add-task')}><AddIcon sx={{ fontSize: 20, mr: 1 }} /> Add Task</Button>
+                <Box display={"flex"} flexDirection={"column"} gap={1}>
+                    <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                        <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>Task</Typography>
+                        <Button variant='contained' sx={{ letterSpacing: 1, backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems: "center", justifyContent: "center" }} onClick={() => navigate('/add-task')}><AddIcon sx={{ fontSize: 20, mr: 1 }} /> Add Task</Button>
+                    </Box>
+                    <Divider sx={{ bgcolor: "#8093F1", }} />
                 </Box>
-                <Divider sx={{ bgcolor: "#8093F1", }} />
 
                 <Box display='flex' justifyContent='flex-end' gap={2}>
                     <Box>
