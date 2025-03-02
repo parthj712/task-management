@@ -34,51 +34,51 @@ const DashboardPage = () => {
                         <IconButton
                             tooltipText="Download"
                             sx={{
-                            
-                              backgroundColor: "#8093F1",
-                            
-                              transition: "all 0.3s ease", // Smooth transition effect
-                              "&:hover": {
+
                                 backgroundColor: "#8093F1",
-                                "& svg": {
-                                  color: "white", // Only change icon color on hover
+
+                                transition: "all 0.3s ease", // Smooth transition effect
+                                "&:hover": {
+                                    backgroundColor: "#8093F1",
+                                    "& svg": {
+                                        color: "white", // Only change icon color on hover
+                                    },
                                 },
-                              },
                             }}
                         >
                             <FileDownloadOutlinedIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
                     </Box>
                     <Box>
-                        <IconButton  tooltipText="Download"
+                        <IconButton tooltipText="Download"
                             sx={{
-                           
-                              backgroundColor: "#8093F1",
-                            
-                              transition: "all 0.3s ease", // Smooth transition effect
-                              "&:hover": {
+
                                 backgroundColor: "#8093F1",
-                                "& svg": {
-                                  color: "white", // Only change icon color on hover
+
+                                transition: "all 0.3s ease", // Smooth transition effect
+                                "&:hover": {
+                                    backgroundColor: "#8093F1",
+                                    "& svg": {
+                                        color: "white", // Only change icon color on hover
+                                    },
                                 },
-                              },
                             }}>
                             <UploadIcon sx={{ fontSize: 22 }} />
                         </IconButton>
                     </Box>
                     <Box>
-                        <IconButton  tooltipText="Download"
+                        <IconButton tooltipText="Download"
                             sx={{
-                          
-                              backgroundColor: "#8093F1",
-                            
-                              transition: "all 0.3s ease", // Smooth transition effect
-                              "&:hover": {
+
                                 backgroundColor: "#8093F1",
-                                "& svg": {
-                                  color: "white", // Only change icon color on hover
+
+                                transition: "all 0.3s ease", // Smooth transition effect
+                                "&:hover": {
+                                    backgroundColor: "#8093F1",
+                                    "& svg": {
+                                        color: "white", // Only change icon color on hover
+                                    },
                                 },
-                              },
                             }}>
                             <SimCardDownloadIcon sx={{ fontSize: 22 }} />
                         </IconButton>
@@ -106,7 +106,12 @@ const DashboardPage = () => {
                                     <TableRow key={user.id} sx={{ "&:nth-of-type(odd)": { backgroundColor: "#f5f5f5" } }}>
                                         <TableCell align="center">{user.id}</TableCell>
                                         <TableCell align="center">{user.name}</TableCell>
-                                        <TableCell align="center">{user.status}</TableCell>
+                                        <TableCell align="center" sx={{
+                                            color: user.status === "Completed" ? "green" :
+                                                user.status === "In Progress" ? "orange" :
+                                                    "red",
+                                            fontWeight: "bold"
+                                        }}>{user.status}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
