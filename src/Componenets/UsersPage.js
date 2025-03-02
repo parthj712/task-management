@@ -54,7 +54,7 @@ const UsersPage = () => {
     return (
         <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={6}>
             {/* Header Section */}
-            <Box>
+            <Box display={"flex"} flexDirection={"column"} gap={1}>
                 <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
                     <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>
                         Users
@@ -78,7 +78,7 @@ const UsersPage = () => {
             </Box>
 
             {/* Search Bar & Icons */}
-            <Box display="flex" justifyContent="space-between" alignItems="center" gap={2}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" >
 
                 {/* Search Bar */}
                 <TextField
