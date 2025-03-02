@@ -4,6 +4,7 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import UploadIcon from '@mui/icons-material/Upload';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from 'react-router-dom';
 
 const dummyData = [
     { id: 1, taskname: "Add Skeleton for table view", assign: "01/01/2025", end: "01/05/2025" },
@@ -20,12 +21,15 @@ const dummyData = [
 
 
 const TaskPage = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div>
             <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={8}>
                 <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
                     <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>Task</Typography>
-                    <Button variant='contained' sx={{ letterSpacing: 1, backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems: "center", justifyContent: "center" }}><AddIcon sx={{ fontSize: 20, mr: 1 }} /> Add User</Button>
+                    <Button variant='contained' sx={{ letterSpacing: 1, backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems: "center", justifyContent: "center" }} onClick={() => navigate('/add-task')}><AddIcon sx={{ fontSize: 20, mr: 1 }} /> Add Task</Button>
                 </Box>
                 <Divider sx={{ bgcolor: "#8093F1", }} />
 

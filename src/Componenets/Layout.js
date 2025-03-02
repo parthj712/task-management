@@ -57,7 +57,7 @@ const Layout = () => {
                                         color: isActive ? "white" : "inherit",
                                         borderRadius: 1,
                                     }}>
-                                        <ListItemIcon  sx={{ color: "black" ,  color: isActive ? "white" : "inherit",  }}>{item.icon}</ListItemIcon>
+                                        <ListItemIcon sx={{ color: "black" ,  color: isActive ? "white" : "inherit",  }}>{item.icon}</ListItemIcon>
                                         <ListItemText primary={item.text} />
                                     </ListItemButton>
                                 </ListItem>

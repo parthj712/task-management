@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useState } from "react";
 
 // mui
-import { Box, Button, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Tooltip,
+    Typography,
+    TextField,
+} from "@mui/material";
 
 // mui icons
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import UploadIcon from '@mui/icons-material/Upload';
-import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import UploadIcon from "@mui/icons-material/Upload";
+import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-//dummydata
+// Dummy Data
 const dummyData = [
-    { id: 1, name: "Tony Stark", email: "tonystark@gmail.com", mobile: "1234567890", status: "Completed" },
+    { id: 1, name: "Tony Stark", email: "tonystark@gmail.com", mobile: "8698828048", status: "Completed" },
     { id: 2, name: "Chris Evans", email: "chrisevans@gmail.com", mobile: "9876543210", status: "In Progress" },
     { id: 3, name: "Johnathan Majors", email: "johnmajors@gmail.com", mobile: "7894561230", status: "Incomplete" },
     { id: 4, name: "Scarlett Johansson", email: "scarlettj@gmail.com", mobile: "6549873210", status: "Completed" },
@@ -24,111 +39,135 @@ const dummyData = [
     { id: 10, name: "Paul Rudd", email: "paulrudd@gmail.com", mobile: "3698521470", status: "In Progress" },
 ];
 
-
-
-
 const UsersPage = () => {
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState("");
 
-    const navigate = useNavigate(); 
+    // Filtered Data Based on Search Input
+    const filteredUsers = dummyData.filter(
+        (user) =>
+            user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.mobile.includes(searchTerm)
+    );
 
     return (
-        <div>
-            <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={8}>
+        <Box display={"flex"} flexDirection={"column"} pl={40} pr={8} gap={6}>
+            {/* Header Section */}
+            <Box>
                 <Box display={"flex"} flexDirection={"row"} alignItems={"center"} justifyContent={"space-between"}>
-                    <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>Users</Typography>
-                    <Button variant='contained' sx={{letterSpacing: 1 , backgroundColor: "#72DDF7", borderRadius: 2, color: "black", alignItems:"center" , justifyContent:"center" }} onClick={() => navigate('/add-user')}><AddIcon sx={{ fontSize: 20, mr:1 }} /> Add User</Button>
+                    <Typography gutterBottom fontSize={"40px"} textAlign={"left"} sx={{ letterSpacing: 1 }}>
+                        Users
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            letterSpacing: 1,
+                            backgroundColor: "#72DDF7",
+                            borderRadius: 2,
+                            color: "black",
+                            "&:hover": { backgroundColor: "#5ac8e5" },
+                        }}
+                        onClick={() => navigate("/add-user")}
+                    >
+                        <AddIcon sx={{ fontSize: 20, mr: 1 }} /> Add User
+                    </Button>
                 </Box>
-                <Divider sx={{ bgcolor: "#8093F1", }} />
 
-                <Box display='flex' justifyContent='flex-end' gap={2}>
-                    <Box>
-                        <IconButton
-                            tooltipText="Download"
-                            sx={{
-                                backgroundColor: "#8093F1",
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}
-                        >
+                <Divider sx={{ bgcolor: "#8093F1" }} />
+            </Box>
+
+            {/* Search Bar & Icons */}
+            <Box display="flex" justifyContent="space-between" alignItems="center" gap={2}>
+
+                {/* Search Bar */}
+                <TextField
+                    id="search"
+                    label="Search by Name or Email"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    sx={{
+                        pr: 8,
+                        "& .MuiInputLabel-root": {
+                            fontSize: "16px",
+                            opacity: "40%"
+                        },
+                        "& .MuiOutlinedInput-root": {
+                            borderRadius: "8px", // Change border radius
+                        },
+                    }}
+                    InputLabelProps={{
+                        shrink: false, // Ensures the label shrinks properly
+                    }}
+                />
+
+                {/* Action Buttons */}
+                <Box display="flex" gap={2}>
+                    <Tooltip title="Download">
+                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" } , "&:hover" : {border : 1} }}>
                             <FileDownloadOutlinedIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
-                    <Box>
-                        <IconButton tooltipText="Download"
-                            sx={{
-
-                                backgroundColor: "#8093F1",
-
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}>
+                    </Tooltip>
+                    <Tooltip title="Upload">
+                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" } , "&:hover" : {border : 1} }}>
                             <UploadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
-                    <Box>
-                        <IconButton tooltipText="Download"
-                            sx={{
-
-                                backgroundColor: "#8093F1",
-
-                                transition: "all 0.3s ease", // Smooth transition effect
-                                "&:hover": {
-                                    backgroundColor: "#8093F1",
-                                    "& svg": {
-                                        color: "white", // Only change icon color on hover
-                                    },
-                                },
-                            }}>
+                    </Tooltip>
+                    <Tooltip title="Export">
+                        <IconButton sx={{ backgroundColor: "#8093F1", "&:hover svg": { color: "black" } , "&:hover" : {border : 1}}}>
                             <SimCardDownloadIcon sx={{ fontSize: 22, color: "black" }} />
                         </IconButton>
-                    </Box>
+                    </Tooltip>
                 </Box>
 
-                <Box>
-                    <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 3 }}>
-                        <Table>
-                            <TableHead sx={{ backgroundColor: "#8093F1" }}>
-                                <TableRow>
-                                    <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
-                                        ID
-                                    </TableCell>
-                                    <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
-                                        User Name
-                                    </TableCell>
-                                    <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
-                                        Gmail
-                                    </TableCell>
-                                    <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
-                                        Mobile No.
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {dummyData.map((user) => (
+            </Box>
+
+            {/* Table */}
+            <Box>
+                <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 3 }}>
+                    <Table>
+                        <TableHead sx={{ backgroundColor: "#8093F1" }}>
+                            <TableRow>
+                                <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
+                                    ID
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
+                                    User Name
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
+                                    Gmail
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}>
+                                    Mobile No.
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {filteredUsers.length > 0 ? (
+                                filteredUsers.map((user) => (
                                     <TableRow key={user.id} sx={{ "&:nth-of-type(odd)": { backgroundColor: "#f5f5f5" } }}>
                                         <TableCell align="center">{user.id}</TableCell>
                                         <TableCell align="center">{user.name}</TableCell>
                                         <TableCell align="center">{user.email}</TableCell>
                                         <TableCell align="center">{user.mobile}</TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={4} align="center">
+                                        No Users Found
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Box>
-        </div>
-    )
-}
+        </Box>
+    );
+};
 
-export default UsersPage
+export default UsersPage;
